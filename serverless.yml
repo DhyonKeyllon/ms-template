@@ -1,0 +1,67 @@
+service: ms-template
+
+frameworkVersion: ^3.18.1
+
+plugins:
+  - serverless-deployment-bucket
+  - serverless-offline
+  - serverless-webpack
+  # - serverless-webpack-prisma
+  - serverless-dotenv-plugin
+
+provider:
+  name: aws
+  runtime: nodejs16.x
+  timeout: 6
+  memorySize: 256
+  logRetentionInDays: 30
+  region: ${opt:region, 'us-west-2'}
+  stage: ${opt:stage, 'dev'}
+
+  deploymentBucket:
+    name: ace-one-${self:service}-${self:provider.stage}
+    serverSideEncryption: AES256
+
+custom:
+  settings:
+    sns:
+      topicName: sns-${self:service}-${self:provider.stage}
+    http:
+      allowedMethods: any
+  webpack:
+    webpackConfig: "webpack.config.js"
+    includeModules:
+      forceInclude:
+        # - class-transformer
+        # - class-validator
+        # - apollo-server-express
+        # - apollo-server-core
+    packager: "yarn"
+
+functions:
+  api:
+    name: ${self:service}-api-${self:provider.stage}
+    description: Handler for API Event CRUD Template
+    handler: src/handlers/api.handler
+    events:
+      - http:
+          method: ${self:custom.settings.http.allowedMethods}
+          path: /{proxy+}
+# TODO: integrar SNS
+#   sns:
+#     name: ${self:service}-sns-${self:provider.stage}
+#     description: Handler for SNS Event CRUD Template
+#     handler: src/handlers/sns.handler
+#     dependsOn:
+#       - SNSTopicTemplate
+#     events:
+#       - sns:
+#           arn: !Ref SNSTopicTemplate
+#           topicName: ${self:custom.settings.sns.topicName}
+
+# resources:
+#   Resources:
+#     SNSTopicTemplate:
+#       Type: AWS::SNS::Topic
+#       Properties:
+#         TopicName: ${self:custom.settings.sns.topicName}

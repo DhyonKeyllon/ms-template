@@ -1,0 +1,17 @@
+{
+  "recommendations": [
+    "editorconfig.editorconfig",
+    "adpyke.codesnap",
+    "dzhavat.bracket-pair-toggler",
+    "dbaeumer.vscode-eslint",
+    "ms-vsliveshare.vsliveshare",
+    "esbenp.prettier-vscode",
+    "redhat.vscode-yaml",
+    "oderwat.indent-rainbow",
+    "usernamehw.errorlens",
+    "mikestead.dotenv",
+    "aaron-bond.better-comments",
+    "DanielThielking.aws-cloudformation-yaml",
+    "DavidAnson.vscode-markdownlint"
+  ]
+}

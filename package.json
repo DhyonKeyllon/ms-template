@@ -1,0 +1,120 @@
+{
+  "name": "ms-template",
+  "version": "1.2206.0",
+  "description": "Microservice Serverless Template with AWS and NestJS",
+  "author": "ACE 1",
+  "private": true,
+  "license": "MIT",
+  "engines": {
+    "node": "16",
+    "npm": "8"
+  },
+  "scripts": {
+    "predeploy": "rimraf .build .tsbuildinfo .webpack dist",
+    "deploy": "export NODE_ENV=deploy && sls deploy --verbose -s",
+    "postdeploy": "rimraf .tsbuildinfo .build .webpack",
+    "undeploy": "sls remove --verbose -s",
+    "prelint": "eslint \"src/**/*.ts\" --fix",
+    "lint": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "dev": "export NODE_ENV=local && nest start --watch",
+    "start": "export NODE_ENV=local && sls offline start --allowCache --httpPort 3000 --lambdaPort 3333 --stage dev",
+    "invoke": "export NODE_ENV=local && sls invoke local -f",
+    "inspect": "sls info --verbose -s",
+    "test": "export NODE_ENV=test && jest",
+    "test:cov": "jest --coverage",
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "prepare": "husky install",
+    "prisma:generate": "prisma generate",
+    "prisma:push": "prisma db push"
+  },
+  "dependencies": {
+    "@nestjs/common": "^8.0.0",
+    "@nestjs/core": "^8.0.0",
+    "@nestjs/platform-express": "^8.4.6",
+    "aws-lambda": "^1.0.7",
+    "aws-serverless-express": "^3.4.0",
+    "reflect-metadata": "^0.1.13",
+    "rimraf": "^3.0.2",
+    "rxjs": "^7.2.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.0.2",
+    "@commitlint/config-conventional": "^17.0.2",
+    "@nestjs/cli": "^8.0.0",
+    "@nestjs/schematics": "^8.0.0",
+    "@nestjs/testing": "^8.0.0",
+    "@types/aws-lambda": "^8.10.101",
+    "@types/aws-serverless-express": "^3.3.5",
+    "@types/express": "^4.17.13",
+    "@types/jest": "27.5.0",
+    "@types/node": "^16.0.0",
+    "@types/supertest": "^2.0.11",
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "@typescript-eslint/parser": "^5.0.0",
+    "commitizen": "^4.2.4",
+    "cz-conventional-changelog": "3.3.0",
+    "eslint": "^8.0.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-import-helpers": "^1.2.1",
+    "eslint-plugin-jest": "^26.5.3",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-unused-imports": "^2.0.0",
+    "fork-ts-checker-webpack-plugin": "^7.2.13",
+    "husky": "^8.0.1",
+    "jest": "28.0.3",
+    "lint-staged": "^13.0.1",
+    "prettier": "^2.3.2",
+    "serverless-deployment-bucket": "^1.6.0",
+    "serverless-dotenv-plugin": "^4.0.1",
+    "serverless-offline": "^8.8.0",
+    "serverless-webpack": "^5.7.1",
+    "serverless-webpack-prisma": "^1.1.0",
+    "source-map-support": "^0.5.20",
+    "supertest": "^6.1.3",
+    "ts-jest": "28.0.1",
+    "ts-loader": "^9.2.3",
+    "ts-node": "^10.0.0",
+    "tsconfig-paths": "^4.0.0",
+    "tsconfig-paths-webpack-plugin": "^3.5.2",
+    "typescript": "^4.3.5",
+    "webpack": "^5.73.0",
+    "webpack-node-externals": "^3.0.0"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "rootDir": "src",
+    "testRegex": ".*\\.spec\\.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "collectCoverageFrom": [
+      "**/*.(t|j)s"
+    ],
+    "coverageDirectory": "../coverage",
+    "testEnvironment": "node",
+    "moduleNameMapper": {
+      "@index/(.*)": "<rootDir>/src/$1",
+      "@modules/(.*)": "<rootDir>/src/modules/$1"
+    }
+  },
+  "lint-staged": {
+    "!(*test|spec).(t|j)s": [
+      "yarn lint"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
+    }
+  }
+}

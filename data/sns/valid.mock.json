@@ -1,0 +1,22 @@
+{
+  "EventSource": "aws:sns",
+  "EventVersion": "1.0",
+  "EventSubscriptionArn": "arn:aws:sns:<REGION>:<ACCOUNT_ID>:<TOPIC>-<STAGE>:hash",
+  "Records": [
+    {
+      "Sns": {
+        "Subject": "SUBJECT",
+        "Message": "{\"text\":\"Hello World\"}",
+        "Type": "Notification",
+        "MessageId": "8e8aba74-b688-5540-aa6b-e060822e2266",
+        "TopicArn": "arn:aws:sns:<REGION>:<ACCOUNT_ID>:<TOPIC>-<STAGE>",
+        "Timestamp": "2022-06-03T16:08:38.414Z",
+        "SignatureVersion": "1",
+        "Signature": "long-hash",
+        "SigningCertUrl": "https://sns.<REGION>.amazonaws.com/SimpleNotificationService-7ff5318490ec183fbaddaa2a969abfda.pem",
+        "UnsubscribeUrl": "https://sns.<REGION>.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:<REGION>:<ACCOUNT_ID>:<TOPIC>-<STAGE>:42262c60-72d6-4efa-964a-8d243dda9dcc",
+        "MessageAttributes": {}
+      }
+    }
+  ]
+}

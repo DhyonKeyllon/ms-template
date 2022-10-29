@@ -1,0 +1,52 @@
+name: Serverless Deploy Production
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+    types:
+      - "ready_for_review"
+
+env:
+  DATABASE_URL: ${{ secrets.PROD_DATABASE_URL }}
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  NODE_ENV: "deploy"
+
+jobs:
+  deploy-prod:
+    if: github.repository != 'ace1-intermediacao-de-negocios-ltda/ms-template'
+
+    name: Serverless Deploy Production
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: webfactory/ssh-agent@v0.5.4
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Update Submodules Recursively
+        run: |
+          git submodule update --init --recursive
+          git submodule update --recursive --remote
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install Dependencies
+        run: yarn --frozen-lockfile
+
+      - name: Deploy
+        uses: serverless/github-action@v3.1
+        with:
+          args: deploy --verbose -s prod

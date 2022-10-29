@@ -1,0 +1,59 @@
+{
+  "body": null,
+  "path": "",
+  "pathParameters": null,
+  "queryStringParameters": null,
+  "headers": {
+    "Host": "localhost:3000",
+    "User-Agent": "USER-AGENT",
+    "Content-Type": "application/json",
+    "Accept": "*/*",
+    "Content-Length": "6"
+  },
+  "httpMethod": "GET",
+  "isBase64Encoded": false,
+  "multiValueHeaders": {
+    "Host": ["localhost:3000"],
+    "User-Agent": ["USER-AGENT"],
+    "Content-Type": ["application/json"],
+    "Accept": ["*/*"],
+    "Content-Length": ["6"]
+  },
+  "multiValueQueryStringParameters": null,
+  "requestContext": {
+    "accountId": "offlineContext_accountId",
+    "apiId": "offlineContext_apiId",
+    "authorizer": {
+      "principalId": "offlineContext_authorizer_principalId"
+    },
+    "domainName": "offlineContext_domainName",
+    "domainPrefix": "offlineContext_domainPrefix",
+    "extendedRequestId": "cl479kgsx24032ru12ga000cu",
+    "httpMethod": "GET",
+    "identity": {
+      "accessKey": null,
+      "accountId": "offlineContext_accountId",
+      "apiKey": "offlineContext_apiKey",
+      "apiKeyId": "offlineContext_apiKeyId",
+      "caller": "offlineContext_caller",
+      "cognitoAuthenticationProvider": "offlineContext_cognitoAuthenticationProvider",
+      "cognitoAuthenticationType": "offlineContext_cognitoAuthenticationType",
+      "cognitoIdentityId": "offlineContext_cognitoIdentityId",
+      "cognitoIdentityPoolId": "offlineContext_cognitoIdentityPoolId",
+      "principalOrgId": null,
+      "sourceIp": "127.0.0.1",
+      "user": "offlineContext_user",
+      "userAgent": "USER-AGENT",
+      "userArn": "offlineContext_userArn"
+    },
+    "path": "",
+    "protocol": "HTTP/1.1",
+    "requestId": "cl479kusx00042ru124kdhguy",
+    "requestTime": "09/Jun/2022:13:58:48 -0300",
+    "requestTimeEpoch": 1654793928176,
+    "resourceId": "offlineContext_resourceId",
+    "resourcePath": "/dev/{proxy*}",
+    "stage": "dev"
+  },
+  "resource": "/{proxy*}"
+}
